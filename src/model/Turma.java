@@ -7,6 +7,7 @@ public class Turma {
     private Integer semestre;
 
     private Instituicao instituicao;
+    private Disciplina disciplina;
 
     public Instituicao getInstituicao() {
         return instituicao;
