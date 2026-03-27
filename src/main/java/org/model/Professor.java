@@ -1,16 +1,18 @@
-package model;
+package org.model;
+
+
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Professor extends Pessoa {
+public class Professor extends model.Pessoa {
 
     private String matricula;
     private int titulacaoMaxima;
 
-    private List<Curso> cursosLecionados = new ArrayList<>();
-    private ArrayList<Turma> turmas;
+    private List<model.Curso> cursosLecionados = new ArrayList<>();
+    private ArrayList<model.Turma> turmas;
 
     public Professor() {
     }
