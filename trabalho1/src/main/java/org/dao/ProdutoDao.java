@@ -2,56 +2,56 @@ package org.dao;
 
 import jakarta.persistence.EntityManager;
 import org.config.JpaConnection;
-import org.model.Empresa;
+import org.model.Produto;
+
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-// DAO responsável pelas operações CRUD da entidade Empresa.
-public class EmpresaDao {
+public class ProdutoDao {
     private static final AtomicLong ID_SEQ = new AtomicLong(2000L);
 
     // Salva uma nova empresa.
-    public Empresa create(Empresa empresa) {
+    public Produto create(Produto produto) {
         return JpaConnection.executeInTransaction(entityManager -> {
-            entityManager.persist(empresa);
-            return empresa;
+            entityManager.persist(produto);
+            return produto;
         });
     }
 
     // Busca uma empresa pelo ID.
-    public Empresa findById(long id) {
+    public Produto findById(long id) {
         EntityManager entityManager = JpaConnection.getEntityManager();
         try {
-            return entityManager.find(Empresa.class, id);
+            return entityManager.find(Produto.class, id);
         } finally {
             entityManager.close();
         }
     }
 
     // Lista todos as empresas.
-    public List<Empresa> findAll() {
+    public List<Produto> findAll() {
         EntityManager entityManager = JpaConnection.getEntityManager();
         try {
-            return entityManager.createQuery("from Curso", Empresa.class).getResultList();
+            return entityManager.createQuery("from Curso", Produto.class).getResultList();
         } finally {
             entityManager.close();
         }
     }
 
     // Atualiza os dados de uma empresa.
-    public Empresa update(Empresa empresa) {
-        return JpaConnection.executeInTransaction(entityManager -> entityManager.merge(empresa));
+    public Produto update(Produto produto) {
+        return JpaConnection.executeInTransaction(entityManager -> entityManager.merge(produto));
     }
 
     // Remove uma empresa pelo ID e informa se a remoção ocorreu.
     public boolean deleteById(long id) {
         return JpaConnection.executeInTransaction(entityManager -> {
-            Empresa empresa = entityManager.find(Empresa.class, id);
-            if (empresa == null) {
+            Produto produto = entityManager.find(Produto.class, id);
+            if (produto == null) {
                 return false;
             }
-            entityManager.remove(empresa);
+            entityManager.remove(produto);
             return true;
         });
     }
@@ -59,7 +59,7 @@ public class EmpresaDao {
     // Remove todos as empresas e retorna a quantidade apagada.
     public int deleteAll() {
         return JpaConnection.executeInTransaction(entityManager ->
-                entityManager.createQuery("delete from Empresa").executeUpdate()
+                entityManager.createQuery("delete from Produto").executeUpdate()
         );
     }
 
