@@ -74,10 +74,11 @@ public class EmpresaDaoTest {
         empresa.setEndereco("Rua W");
         empresa.setCnpj("73.553.0001/38");
         dao.create(empresa);
-        empresa.setEndereco(empresa.getEndereco() + "Nº 1578");
+        empresa.setEndereco(empresa.getEndereco() + " Nº 1578");
         dao.update(empresa);
         Empresa atualizada = dao.findById(empresa.getId());
-        assertEquals(empresa.getEndereco(), atualizada.getEndereco());
+        assertNotNull(atualizada, "A empresa deveria existir no banco");
+        assertEquals("Rua W Nº 1578", atualizada.getEndereco());
     }
 
     @Test

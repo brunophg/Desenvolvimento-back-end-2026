@@ -32,7 +32,7 @@ public class NotaDao {
     public List<Nota> findAll() {
         EntityManager entityManager = JpaConnection.getEntityManager();
         try {
-            return entityManager.createQuery("from Curso", Nota.class).getResultList();
+            return entityManager.createQuery("from Nota", Nota.class).getResultList();
         } finally {
             entityManager.close();
         }
