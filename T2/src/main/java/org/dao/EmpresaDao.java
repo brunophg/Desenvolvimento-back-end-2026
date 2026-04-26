@@ -3,11 +3,13 @@ package org.dao;
 import jakarta.persistence.EntityManager;
 import org.config.JpaConnection;
 import org.model.Empresa;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 // DAO responsável pelas operações CRUD da entidade Empresa.
+@Repository
 public class EmpresaDao {
     private static final AtomicLong ID_SEQ = new AtomicLong(2000L);
 

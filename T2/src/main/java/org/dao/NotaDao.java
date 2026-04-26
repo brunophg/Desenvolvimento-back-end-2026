@@ -3,17 +3,19 @@ package org.dao;
 import jakarta.persistence.EntityManager;
 import org.config.JpaConnection;
 import org.model.Nota;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class NotaDao {
     private static final AtomicLong ID_SEQ = new AtomicLong(2000L);
 
     // Salva uma nova.
     public Nota create(Nota nota) {
         return JpaConnection.executeInTransaction(entityManager -> {
-            entityManager.persist(nota);
+            entityManager.merge(nota);
             return nota;
         });
     }

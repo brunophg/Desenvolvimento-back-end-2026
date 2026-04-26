@@ -19,7 +19,7 @@ public class Nota {
     @Column (name = "numero")
     private Integer numero;
 
-    @Transient
+    @OneToMany(mappedBy = "nota", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ArrayList<ItemNota> itensNota;
 
     @ManyToOne

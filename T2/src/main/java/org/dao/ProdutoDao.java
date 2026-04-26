@@ -3,11 +3,13 @@ package org.dao;
 import jakarta.persistence.EntityManager;
 import org.config.JpaConnection;
 import org.model.Produto;
+import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class ProdutoDao {
     private static final AtomicLong ID_SEQ = new AtomicLong(2000L);
 

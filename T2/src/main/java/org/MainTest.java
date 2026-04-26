@@ -1,3 +1,5 @@
+package org;
+
 import org.config.JpaConnection;
 import org.dao.*;
 import org.model.*;
@@ -8,7 +10,7 @@ import java.util.Date;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public class MainTest {
     public static void main(String[] args) {
         EmpresaDao empresaDao = new EmpresaDao();
         NotaDao notaDao = new NotaDao();

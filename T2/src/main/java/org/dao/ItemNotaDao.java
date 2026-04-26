@@ -3,10 +3,12 @@ package org.dao;
 import jakarta.persistence.EntityManager;
 import org.config.JpaConnection;
 import org.model.ItemNota;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class ItemNotaDao {
     private static final AtomicLong ID_SEQ = new AtomicLong(2000L);
 
