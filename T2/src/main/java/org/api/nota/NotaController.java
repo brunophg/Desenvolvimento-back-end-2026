@@ -1,4 +1,4 @@
-package org.api;
+package org.api.nota;
 
 import org.dao.EmpresaDao;
 import org.dao.NotaDao;
@@ -94,5 +94,10 @@ public class NotaController {
         }
         return ResponseEntity.noContent().build();
     }
+    @PostMapping("/delete-all")
+    public int removerTodos() {
+        return notaDao.deleteAll();
+    }
 
-}
+
+    }

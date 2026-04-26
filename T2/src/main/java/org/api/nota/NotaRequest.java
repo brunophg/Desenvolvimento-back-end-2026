@@ -1,4 +1,4 @@
-package org.api;
+package org.api.nota;
 
 import org.model.Empresa;
 import org.model.Nota;

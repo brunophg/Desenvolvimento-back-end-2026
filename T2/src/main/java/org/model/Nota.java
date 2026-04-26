@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "nota")
@@ -20,7 +21,7 @@ public class Nota {
     private Integer numero;
 
     @OneToMany(mappedBy = "nota", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private ArrayList<ItemNota> itensNota;
+    private List<ItemNota> itensNota;
 
     @ManyToOne
     @JoinColumn (name = "id_participante", nullable = false)
@@ -45,11 +46,11 @@ public class Nota {
         this.empresa = empresa;
     }
 
-    public ArrayList<ItemNota> getItensNota() {
+    public List<ItemNota> getItensNota() {
         return itensNota;
     }
 
-    public void setItensNota(ArrayList<ItemNota> itensNota) {
+    public void setItensNota(List<ItemNota> itensNota) {
         this.itensNota = itensNota;
     }
 
@@ -83,7 +84,7 @@ public class Nota {
             for (ItemNota item : itensNota) {
                 BigDecimal subtotal = item.getVrUnitario().multiply(item.getQuantidade());
 
-                vrTotal.add(subtotal);
+                vrTotal = vrTotal.add(subtotal);
             }
 
         }

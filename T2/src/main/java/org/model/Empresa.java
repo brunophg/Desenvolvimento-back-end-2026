@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.model.Nota;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table (name = "empresa")
@@ -22,13 +23,13 @@ public class Empresa {
     private String cnpj;
 
     @Transient
-    private ArrayList<Nota> notas;
+    private List<Nota> notas;
 
-    public ArrayList<Nota> getNotas() {
+    public List<Nota> getNotas() {
         return notas;
     }
 
-    public void setNotas(ArrayList<Nota> notas) {
+    public void setNotas(List<Nota> notas) {
         this.notas = notas;
     }
 
