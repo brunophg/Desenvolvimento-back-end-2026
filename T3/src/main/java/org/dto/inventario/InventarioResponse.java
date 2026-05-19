@@ -8,7 +8,7 @@ public record InventarioResponse(
         String nomeJogador,
         String nomeItem
 ) {
-    public InventarioResponse fromEntity(Inventario i) {
+    public static InventarioResponse fromEntity(Inventario i) {
         return new InventarioResponse(
                 i.getId(),
                 i.getQuantidade(),

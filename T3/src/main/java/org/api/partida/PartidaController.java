@@ -1,5 +1,6 @@
 package org.api.partida;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.dao.JogadorDao;
 import org.dao.JogoDao;
 import org.dao.PartidaDao;
@@ -66,4 +67,38 @@ public class PartidaController {
         Partida partidaCriada = partidaDao.create(partida);
         return ResponseEntity.status(HttpStatus.CREATED).body(PartidaResponse.fromEntity(partidaCriada));
     }
+
+    @PostMapping("/update")
+    public PartidaResponse atualizar(@RequestBody PartidaRequest request) {
+        if (request.id() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id obrigatorio para atualização");
+        }
+
+        Partida partida = request.toEntity();
+        Jogador jogador = jogadorDao.findById(request.idJogador());
+        Jogo jogo = jogoDao.findById(request.idJogo());
+
+        if (jogador == null || jogo == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id do Jogador ou do Jogo invalido");
+        }
+        partida.setJogador(jogador);
+        partida.setJogo(jogo);
+
+        return PartidaResponse.fromEntity(partidaDao.update(request.toEntity()));
+    }
+
+    @PostMapping("/{id}/delete")
+    public ResponseEntity<Void> removerPorId(@PathVariable long id) {
+        if (!partidaDao.deleteById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Partida nao encontrada");
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/delete-all")
+    public int removerTodos() {
+        return 0;
+    }
+
+
 }
