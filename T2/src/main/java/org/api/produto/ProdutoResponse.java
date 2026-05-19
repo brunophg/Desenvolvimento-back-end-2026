@@ -1,4 +1,17 @@
 package org.api.produto;
 
-public class ProdutoResponse {
+import org.model.Produto;
+
+public record ProdutoResponse(
+        Long id,
+        String codigo,
+        String descricao
+) {
+    public static ProdutoResponse fromEntity(Produto produto) {
+        return new ProdutoResponse(
+                produto.getId(),
+                produto.getCodigo(),
+                produto.getDescricao()
+        );
+    }
 }

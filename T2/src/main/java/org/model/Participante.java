@@ -3,6 +3,8 @@ package org.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "participante")
 public class Participante {
@@ -20,8 +22,8 @@ public class Participante {
     @Column (name = "cnpj")
     private String cnpj;
 
-    @Transient
-    private ArrayList<Nota> notas;
+    @OneToMany(mappedBy = "participante", cascade = CascadeType.ALL)
+    private List<Nota> notas = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -55,11 +57,11 @@ public class Participante {
         this.cnpj = cnpj;
     }
 
-    public ArrayList<Nota> getNotas() {
+    public List<Nota> getNotas() {
         return notas;
     }
 
-    public void setNotas(ArrayList<Nota> notas) {
+    public void setNotas(List<Nota> notas) {
         this.notas = notas;
     }
 }

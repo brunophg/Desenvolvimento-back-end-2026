@@ -83,8 +83,7 @@ public class NotaController {
         nota.setEmpresa(empresa);
         nota.setParticipante(participante);
 
-        return NotaResponse.fromEntity((notaDao.update(request.toEntity())));
-
+        return NotaResponse.fromEntity(notaDao.update(nota));
     }
 
     @PostMapping("/{id}/delete")

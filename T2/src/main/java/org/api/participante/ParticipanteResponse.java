@@ -1,4 +1,19 @@
 package org.api.participante;
 
-public record ParticipanteResponse() {
+import org.model.Participante;
+
+public record ParticipanteResponse(
+        Long id,
+        Integer codigo,
+        String razaoSocial,
+        String cnpj
+) {
+    public static ParticipanteResponse fromEntity(Participante participante) {
+        return new ParticipanteResponse(
+                participante.getId(),
+                participante.getCodigo(),
+                participante.getRazaoSocial(),
+                participante.getCnpj()
+        );
+    }
 }

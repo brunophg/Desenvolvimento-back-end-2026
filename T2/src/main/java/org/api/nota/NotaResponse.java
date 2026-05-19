@@ -9,8 +9,8 @@ public record NotaResponse(
         Long id,
         Date data,
         Integer numero,
-        String razaoSocialEmpresa,      // Mudou de Long para String
-        String razaoSocialParticipante, // Mudou de Long para String
+        String razaoSocialEmpresa,
+        String razaoSocialParticipante,
         BigDecimal valorTotal
 )
 {

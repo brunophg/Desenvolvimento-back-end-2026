@@ -47,6 +47,9 @@ public class Nota {
     }
 
     public List<ItemNota> getItensNota() {
+        if (itensNota == null) {
+            itensNota = new ArrayList<ItemNota>();
+        }
         return itensNota;
     }
 
@@ -80,13 +83,11 @@ public class Nota {
 
     public BigDecimal getVrTotal() {
         BigDecimal vrTotal = BigDecimal.ZERO;
-        if (itensNota != null) {
-            for (ItemNota item : itensNota) {
+        for (ItemNota item : getItensNota()) {
+            if (item.getVrUnitario() != null && item.getQuantidade() != null) {
                 BigDecimal subtotal = item.getVrUnitario().multiply(item.getQuantidade());
-
                 vrTotal = vrTotal.add(subtotal);
             }
-
         }
         return vrTotal;
     }
