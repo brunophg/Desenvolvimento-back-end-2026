@@ -6,7 +6,7 @@ import org.model.Partida;
 
 import java.time.LocalDateTime;
 
-public record PartidaRequestDTO(
+public record PartidaRequest(
         Long id,
         LocalDateTime data,
         Integer pontuacao,
