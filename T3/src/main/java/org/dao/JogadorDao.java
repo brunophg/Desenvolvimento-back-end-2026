@@ -1,8 +1,10 @@
 package org.dao;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.model.Jogador;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -11,9 +13,11 @@ import java.util.concurrent.atomic.AtomicLong;
 public class JogadorDao {
 
     private static final AtomicLong ID_SEQ = new AtomicLong(4000L);
+    @PersistenceContext
     private EntityManager entityManager;
 
     // Cria um novo jogador
+    @Transactional
     public Jogador create(Jogador jogador) {
         entityManager.persist(jogador);
         return jogador;
@@ -30,11 +34,13 @@ public class JogadorDao {
     }
 
     // Atualiza os dados de um Jogador.
+    @Transactional
     public Jogador update(Jogador jogador) {
         return entityManager.merge(jogador);
     }
 
     // Remove um Item pelo ID e informa se a remoção ocorreu.
+    @Transactional
     public boolean deleteById(long id) {
         Jogador jogador = entityManager.find(Jogador.class, id);
         if (jogador == null) {
