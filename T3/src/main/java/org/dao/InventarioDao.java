@@ -3,10 +3,12 @@ package org.dao;
 import jakarta.persistence.EntityManager;
 import org.model.Inventario;
 import org.model.Inventario;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class InventarioDao {
     private static final AtomicLong ID_SEQ = new AtomicLong(4000L);
     private EntityManager entityManager;
