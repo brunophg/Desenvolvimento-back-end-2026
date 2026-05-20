@@ -3,6 +3,7 @@ package org.api.jogador;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.dao.JogadorDao;
+import org.dto.jogador.JogadorRankingDTO;
 import org.dto.jogador.JogadorResponse;
 import org.dto.jogador.JogadorRequest;
 import org.model.Jogador;
@@ -86,5 +87,11 @@ public class JogadorController {
     @Operation(summary = "Remover todos os jogadores", description = "Exclui todos os jogadores cadastrados e retorna a quantidade removida.")
     public int removerTodos() {
         return 0;
+    }
+
+    @GetMapping("/ranking")
+    @Operation(summary = "Obter ranking de jogadores", description = "Retorna a lista de jogadores ordenada pela pontuação total acumulada.")
+    public List<JogadorRankingDTO> obterRanking() {
+        return jogadorDao.getRanking();
     }
 }

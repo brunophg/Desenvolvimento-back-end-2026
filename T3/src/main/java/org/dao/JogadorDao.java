@@ -2,6 +2,7 @@ package org.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.dto.jogador.JogadorRankingDTO;
 import org.model.Jogador;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,17 @@ public class JogadorDao {
     // Retorna o próximo ID sequencial.
     public long nextId() {
         return ID_SEQ.incrementAndGet();
+    }
+
+    public List<JogadorRankingDTO> getRanking() {
+        // Usamos o construtor do record direto na String de consulta
+        String jpql = "SELECT new org.dto.jogador.JogadorRankingDTO(j.id, j.nome, j.nickname, SUM(p.pontuacao)) " +
+                "FROM Jogador j " +
+                "JOIN j.partidas p " +
+                "GROUP BY j.id, j.nome, j.nickname " +
+                "ORDER BY SUM(p.pontuacao) DESC";
+
+        return entityManager.createQuery(jpql, JogadorRankingDTO.class).getResultList();
     }
 
 
