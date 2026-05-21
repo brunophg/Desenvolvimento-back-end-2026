@@ -51,6 +51,10 @@ public class PartidaController {
     }
     @PostMapping
     public ResponseEntity<PartidaResponse> criar (@RequestBody PartidaRequest request) {
+        if(request.idJogador() == null || request.idJogo() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Os IDs de jogador e jogo sao obrigatorios.");
+        }
+
         Partida partida = request.toEntity();
         if (request.id() == null) {
             partida.setId(partidaDao.nextId());
@@ -70,9 +74,14 @@ public class PartidaController {
 
     @PostMapping("/update")
     public PartidaResponse atualizar(@RequestBody PartidaRequest request) {
+
         if (request.id() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id obrigatorio para atualização");
         }
+        if(request.idJogador() == null || request.idJogo() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Os IDs de jogador e jogo sao obrigatorios.");
+        }
+
 
         Partida partida = request.toEntity();
         Jogador jogador = jogadorDao.findById(request.idJogador());
@@ -84,7 +93,7 @@ public class PartidaController {
         partida.setJogador(jogador);
         partida.setJogo(jogo);
 
-        return PartidaResponse.fromEntity(partidaDao.update(request.toEntity()));
+        return PartidaResponse.fromEntity(partidaDao.update(partida));
     }
 
     @PostMapping("/{id}/delete")

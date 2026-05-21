@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inventario")
+@RequestMapping("/inventarios")
 public class InventarioController {
 
     private final InventarioDao inventarioDao;
@@ -57,6 +57,9 @@ public class InventarioController {
         if (request.id() == null) {
             inventario.setId(inventarioDao.nextId());
         }
+        if (request.idJogador() == null || request.idItem() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Os IDs de jogador e item sao obrigatorios.");
+        }
         Jogador jogador = jogadorDao.findById(request.idJogador());
         Item item = itemDao.findById(request.idItem());
 
@@ -75,6 +78,9 @@ public class InventarioController {
         if (request.id() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id obrigatorio para atualização");
         }
+        if (request.idJogador() == null || request.idItem() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Os IDs de jogador e item sao obrigatorios.");
+        }
 
         Inventario inventario = request.toEntity();
         Jogador jogador = jogadorDao.findById(request.idJogador());
@@ -86,7 +92,7 @@ public class InventarioController {
         inventario.setJogador(jogador);
         inventario.setItem(item);
 
-        return InventarioResponse.fromEntity(inventarioDao.update(request.toEntity()));
+        return InventarioResponse.fromEntity(inventarioDao.update(inventario));
     }
 
     @PostMapping("/{id}/delete")
